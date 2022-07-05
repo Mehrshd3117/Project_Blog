@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    {% for article in latest %}
+        <li>{{ article.updated }}: {{ article.title }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>
