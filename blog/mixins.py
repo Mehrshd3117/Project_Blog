@@ -1,8 +1,8 @@
 from django.shortcuts import redirect
 
 
-class LoginRequiredMixin:
+class CustomLoginRequiredMixin:
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect("account:login")
-        return super(LoginRequiredMixin, self).dispatch(request, *args, **kwargs)
+        return super(CustomLoginRequiredMixin, self).dispatch(request, *args, **kwargs)

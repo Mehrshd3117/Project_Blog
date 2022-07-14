@@ -17,13 +17,13 @@ class ContactUsForm(forms.Form):
     birth_year = forms.DateField(widget=forms.DateTimeInput(attrs={'class': 'form-control'}))
     colors = forms.ChoiceField(choices=FAVORITE_COLORS_CHOICES)
     numbers = forms.IntegerField()
+
     def clean(self):
         name = self.cleaned_data.get('name')
         print(name)
         text = self.cleaned_data.get('text')
         if name == text:
             raise ValidationError('name and text are same', code='name_text_same')
-
 
 
 class MessageForm(forms.ModelForm):

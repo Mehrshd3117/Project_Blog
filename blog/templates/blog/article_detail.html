@@ -37,7 +37,12 @@
                             <div class="col-lg-12">
                                 <div class="blog-post">
                                     <div class="blog-thumb">
-                                        <img src="{{ object.image.url }}" alt="">
+                                        {% if article.image %}
+                                            <img src="{{ object.image.url }}" alt="">
+                                        {% else %}
+                                            <img src="{% static "images/icons/false-gfca56efa7_1281111.png" %}"
+                                                 alt="">
+                                        {% endif %}
                                     </div>
                                     <div class="down-content">
                                         <span>Lifestyle</span>
@@ -52,9 +57,9 @@
                                             <div class="row">
                                                 <div class="col-6">
                                                     <ul class="post-tags">
-                                                        <li><i class="fa fa-tags"></i></li>
-                                                        <li><a href="#">Best Templates</a>,</li>
-                                                        <li><a href="#">TemplateMo</a></li>
+                                                        <li><a style="font-size: 20px" href=""><i
+                                                                class="fa fa-heart-o"></i></a>3
+                                                        </li>
                                                     </ul>
                                                 </div>
                                                 <div class="col-6">
@@ -84,7 +89,7 @@
                                                                 <img src="{{ comment.user.profile.image.url }}"
                                                                      alt="">
                                                             {% else %}
-                                                                <img src="{% static 'images/icons/index.png' %}"
+                                                                <img src="{% static 'images/icons/user-profile-icon-free-vector.png' %}"
                                                                      alt="">
                                                             {% endif %}
                                                         </div>
@@ -92,7 +97,9 @@
                                                             <h4>{{ comment.user.get_full_name }}<span>{{ comment.created_at }}</span>
                                                             </h4>
                                                             <p>{{ comment.body }}</p>
-                                                            <button onclick="set_value({{ comment.id }})" class="btn btn-primary">reply</button>
+                                                            <button onclick="set_value({{ comment.id }})"
+                                                                    class="btn btn-primary">reply
+                                                            </button>
                                                         </div>
                                                     </li>
                                                     {% for reply in comment.replies.all %}
@@ -102,7 +109,7 @@
                                                                     <img src="{{ comment.user.profile.image.url }}"
                                                                          alt="">
                                                                 {% else %}
-                                                                    <img src="{% static 'images/icons/index.png' %}"
+                                                                    <img src="{% static 'images/icons/user-profile-icon-free-vector.png' %}"
                                                                          alt="">
                                                                 {% endif %}
                                                             </div>
@@ -117,41 +124,43 @@
 
                                             {% endfor %}
                                         </ul>
-
-
                                         {% if request.user.is_authenticated %}
                                             <div class="col-lg-12">
-                                            <div class="sidebar-item submit-comment">
-                                                <div class="sidebar-heading">
-                                                    <h2 id="hi">Your comment</h2>
-                                                </div>
-                                                <div class="content">
-                                                    <form id="comment" action="#" method="post">
-                                                        {% csrf_token %}
-                                                        <div class="row">
-                                                            <input type="hidden" id="parent_id"  name="parent_id" value="">
-                                                            <div class="col-lg-12">
-                                                                <fieldset>
-                                                                            <textarea name="body" rows="6"
-                                                                                      id="body"
-                                                                                      placeholder="Type your comment"
-                                                                                      required=""></textarea>
-                                                                </fieldset>
+                                                <div class="sidebar-item submit-comment">
+                                                    <div class="sidebar-heading">
+                                                        <h2 id="hi">Your comment</h2>
+                                                    </div>
+                                                    <div class="content">
+                                                        <form id="comment" action="#" method="post">
+                                                            {% csrf_token %}
+                                                            <div class="row">
+                                                                <input type="hidden" id="parent_id" name="parent_id"
+                                                                       value="">
+                                                                <div class="col-lg-12">
+                                                                    <fieldset>
+                                                                        <textarea
+                                                                                name="body"
+                                                                                rows="6"
+                                                                                id="body"
+                                                                                placeholder="Type your comment"
+                                                                                required=""></textarea>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <fieldset>
+                                                                        <button type="submit" id="form-submit"
+                                                                                class="main-button">Submit
+                                                                        </button>
+                                                                    </fieldset>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-lg-12">
-                                                                <fieldset>
-                                                                    <button type="submit" id="form-submit"
-                                                                            class="main-button">Submit
-                                                                    </button>
-                                                                </fieldset>
-                                                            </div>
-                                                        </div>
-                                                    </form>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                            {% else %}
-                                            <a class="btn btn-danger" href="{% url 'account:login' %}">for sending comment please login</a>
+                                        {% else %}
+                                            <a class="btn btn-danger" href="{% url 'account:login' %}">for sending
+                                                comment please login</a>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -164,12 +173,12 @@
             </div>
         </div>
     </section>
-<script>
+    <script>
 
-    function set_value(id){
-        document.getElementById('parent_id').value = id;
-        window.location.href = "#body"
+        function set_value(id) {
+            document.getElementById('parent_id').value = id;
+            window.location.href = "#body"
 
-    }
-</script>
+        }
+    </script>
 {% endblock %}

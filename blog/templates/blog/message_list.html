@@ -17,10 +17,9 @@
                                     </div>
                                     <div class="content">
                                         {% for m in message_list %}
-                                            <p>{{ m.title }} - {{ m.text|truncatewords:20 }} - {{ m.age }} - <span><a href="{% url "blog:message_edit" m.id %}" class="btn btn-primary">Edit</a></span></p>
+                                            <p>{{ m.title }} - {{ m.text|truncatewords:30 }} - {{ m.age }} - <span><a href="{% url "blog:message_edit" m.id %}" class="btn btn-primary">Edit</a></span></p>
                                             <hr>
                                         {% endfor %}
-
                                     </div>
                                 </div>
                             </div>

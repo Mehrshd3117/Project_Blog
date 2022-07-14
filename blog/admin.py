@@ -2,9 +2,8 @@ from django.contrib import admin
 from . import models
 
 
-
 class FilterByTitle(admin.SimpleListFilter):
-    title = "کلید های پرتکرار"
+    title = "کلیدهای پر تکرار"
     parameter_name = "title"
 
     def lookups(self, request, model_admin):
@@ -18,20 +17,24 @@ class FilterByTitle(admin.SimpleListFilter):
             return queryset.filter(title__icontains=self.value())
 
 
+class CommentInLIne(admin.StackedInline):
+    model = models.Comment
+
+
 @admin.register(models.Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ("__str__","title", "status")
+    list_display = ("__str__", "title", "status", "show_image")
     list_editable = ("title",)
-    list_filter = ("status","published", FilterByTitle)
+    list_filter = ("status", "published", FilterByTitle)
+    inlines = (CommentInLIne,)
     search_fields = ("title", "body")
-    # fields = ("body","title")
-
-
 
 
 admin.site.register(models.Category)
 admin.site.register(models.Comment)
 admin.site.register(models.Message)
+admin.site.register(models.Like)
+
 
 
 
