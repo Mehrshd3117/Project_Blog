@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load render_partial %}
 {% load social_share %}
-{% load filters %}
-{% load my_template_tags %}
 {% block title %}
     home
 {% endblock %}
@@ -40,31 +37,6 @@
     </div>
     <!-- Banner Ends Here -->
 
-    <section class="call-to-action">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="main-content">
-                        <div class="row">
-                            <div class="col-lg-8">
-                                <span>{% current_time "%Y-%m-%d" %}</span>
-
-                                <h4></h4>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="main-button">
-                                    <a rel="nofollow" href="https://templatemo.com/tm-551-stand-blog"
-                                       target="_parent">{{ name }}</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
     <section class="blog-posts">
         <div class="container">
             <div class="row">
@@ -83,14 +55,14 @@
                                             {% endif %}
                                         </div>
                                         <div class="down-content">
-                                            <span>Lifestyle</span>
-                                            <a href="#"><h4>{{ article.title }}</h4></a>
+                                            <span>{{ article.category.first }}</span>
+                                            <a href="{{ article.get_absolute_url }}"><h4>{{ article.title }}</h4></a>
                                             <ul class="post-info">
                                                 <li><a href="#">{{ article.author.get_full_name }}</a></li>
                                                 <li><a href="#">{{ article.created }}</a></li>
                                                 <li><a href="#">12 Comments</a></li>
                                             </ul>
-                                            <p>{{ article.body|mytruncate:79 }}</p>
+                                            <p>{{ article.body|truncatewords:30 }}</p>
                                             <div class="post-options">
                                                 <div class="row">
                                                     <div class="col-6">
@@ -121,8 +93,7 @@
                         </div>
                     </div>
                 </div>
-
-                {% render_partial "home_app:sidebar_partial" %}
+            {% include "includes/sidebar.html" %}
             </div>
         </div>
     </section>

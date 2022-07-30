@@ -15,13 +15,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="{% url "about_us:about" %}">About Us</a>
                     </li>
                     <li class="nav-item {% if request.resolver_match.url_name == 'articles_list' %}active {% endif %}">
                         <a class="nav-link" href="{% url "blog:articles_list" %}">All Articles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Post Details</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'blog:contact_us' %}">Contact Us</a>
@@ -34,13 +31,13 @@
                                         <span><img src="{{ user.profile.image.url }}" width="25px" height="25px"
                                                    style="border-radius: 100%" alt=""></span>
                                     {% else %}
-                                        <span><img src="{% static 'images/icons/index.png' %}" width="25px" height="25px" style="border-radius: 100%" alt=""></span>
+                                        <span class="nav-link"><img src="{% static 'images/icons/user-profile-icon-free-vector.png' %}" width="30px" height="30px" style="border-radius: 100%" alt=""></span>
                                     {% endif %}
                                     <a class="nav-link"
-                                       href="">{{ request.user.first_name }} {{ request.user.last_name }}</a>
+                                       href="{% url "account:edit" %}">{{ request.user.first_name }} {{ request.user.last_name }}</a>
                                 {% else %}
                                     <a class="nav-link"
-                                       href="">{{ request.user.username }}</a>
+                                       href="{% url "account:edit" %}">{{ request.user.username }}</a>
                                 {% endif %}
                                 <a  class="nav-link " href="{% url 'account:logout' %}"> logout</a>
                             </div>

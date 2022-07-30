@@ -43,10 +43,8 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'account.apps.AccountConfig',
     'blog.apps.BlogConfig',
+    'about_us.apps.AboutUsConfig',
     'django_cleanup.apps.CleanupConfig',
-
-    'django_render_partial',
-
     'django_social_share',
     'widget_tweaks'
 ]
@@ -75,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'context_processors.context_processors.recent_articles'
             ],
         },
     },

@@ -8,7 +8,7 @@ from django.utils.text import slugify
 
 class Category(models.Model):
     title = models.CharField(max_length=100, verbose_name="عنوان")
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ساخت")
 
     def __str__(self):
         return self.title
@@ -31,7 +31,6 @@ class Article(models.Model):
     image = models.ImageField(upload_to="images/articles", blank=True, null=True, verbose_name="عکس")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    floatfield = models.FloatField(default=1)
     status = models.BooleanField(default=True, verbose_name="وضعیت")
     published = models.BooleanField(default=True, verbose_name="منتشر شده")
     slug = models.SlugField(blank=True, unique=True, verbose_name="ادرس اینترنتی")
@@ -63,11 +62,11 @@ class Article(models.Model):
 
 
 class Comment(models.Model):
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
-    body = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments', verbose_name="مقاله")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', verbose_name="کاربر")
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies', verbose_name="والد")
+    body = models.TextField(verbose_name="بدنه")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ساخت")
 
     def __str__(self):
         return self.body[:50]
@@ -95,7 +94,7 @@ class Message(models.Model):
 
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="likes", verbose_name="کاربر")
-    article = models.ForeignKey(Article, on_delete=models.CASCADE,related_name="likes",verbose_name="مقاله")
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name="likes", verbose_name="مقاله")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

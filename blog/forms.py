@@ -30,13 +30,3 @@ class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
         fields = '__all__'
-        # widgets = {
-        #     "title": forms.TextInput(attrs={
-        #         "class": "form-control",
-        #         "placeholder": "enter your title",
-        #         "style": "max-width: 300px;"
-        #     }),
-        #     "text": forms.Textarea(attrs={
-        #         "class": "form-control"
-        #     })
-        # }
