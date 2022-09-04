@@ -45,7 +45,6 @@ class ArticleDetailView(CustomLoginRequiredMixin, DetailView):
 
 
 class ArticleListView(CustomLoginRequiredMixin, ListView):
-    model = Article
     context_object_name = "articles"
     paginate_by = 1
     queryset = Article.objects.filter(published=True).order_by('-created', )
