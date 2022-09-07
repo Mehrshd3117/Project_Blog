@@ -103,4 +103,4 @@ class Like(models.Model):
     class Meta:
         verbose_name = "لایک"
         verbose_name_plural = "لایک ها "
-        ordering = ("created_at",)
+        ordering = ("-created_at",)
